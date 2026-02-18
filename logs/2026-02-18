@@ -1,0 +1,87 @@
+## 🔹 テンプレート
+
+### 日付
+2026-02-18
+
+### 今日やったこと
+- Laravel
+-MVC構造
+-レイアウト継承(共通テンプレ)
+-フォーム利用
+-バリデーション
+-ページネーション
+
+### 学んだこと
+
+#-MVCはWebアプリの役割分担
+Controller->指示役
+(メソッド置き場)
+
+Model(Articleオブジェクト)->DB操作担当
+($Article::all() | $Article::pagenate())
+
+View(Blade)->表示担当
+(PHPを書きやすくしたもの)
+_________________________________________
+#レイアウト継承は@を使おう @yield @section @extends @show @endsection
+
+-@yield('title') 穴あき(タイトル用)
+-@section('main') 穴あき(本文用)  　　=> テンプレートをViewフォルダに作成
+-@show
+ 
+ @extends("layout.base")
+ @section("title","これはタイトルだよ")  =>indexLayout.blade.phpに記述
+ @section("main")
+ @show　
+ @endsection
+
+ _________________________________________________________________
+#フォーム利用
+
+composer create-project laravel/laravel apri
+<form>　@csrf </form> フォームを利用するときは必ず書くこと
+
+#バリデーション->エラー表示
+
+@if($errors->any())
+<ul>
+　　@foreach($errors->all() as $error)
+        <li>{{$error}}<li>
+    @endforeach
+<ul>
+@endif
+
+
+
+### 詰まったこと
+- スコープ解決演算子 :: 　クラスそのものを表す->newなしで使える
+ClassName::method
+ClassInstance->method
+
+### 解決
+- クラスそのものにアクセスするのか
+インスタンス化してからメソッドを利用するのかで演算子が変わる
+それがstaticということ
+
+$validated=$req->validate(
+    ["data1"=>"required | string | between 2,10"],
+["data1.required"=>"data1は必須です" ]
+);
+$data=[
+    "data1"=>$validated["data1"];
+]
+
+## 今日の感想
+
+とにかく覚えることが多かった一日
+pagenateがなじみ深い機能でテンションが上がった
+正直これを書くので精いっぱいで復習をする気力がない
+毎日とりあえずこれだけでも続ける習慣づけはしたい
+
+
+## 今後の目標
+
+- 全体構造の理解
+- React基礎習得
+- オリジナルWebアプリ制作
+
